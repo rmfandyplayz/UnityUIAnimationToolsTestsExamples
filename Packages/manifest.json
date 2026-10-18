@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.rmfandyplayz.dotween-ui-animation": "https://github.com/rmfandyplayz/UnityUIAnimationTools.git?path=/DOTweenAnimationPlayer#release",
     "com.unity.2d.animation": "13.0.6",
     "com.unity.2d.aseprite": "3.0.2",
     "com.unity.2d.psdimporter": "12.0.2",
@@ -10,8 +11,8 @@
     "com.unity.2d.tooling": "1.0.4",
     "com.unity.collab-proxy": "2.13.6",
     "com.unity.ide.rider": "3.0.40",
-    "com.unity.ide.visualstudio": "2.0.26",
-    "com.unity.inputsystem": "1.20.0",
+    "com.unity.ide.visualstudio": "2.0.28",
+    "com.unity.inputsystem": "1.20.1",
     "com.unity.multiplayer.center": "1.0.1",
     "com.unity.pipeline": "0.8.0-exp.1",
     "com.unity.render-pipelines.universal": "17.3.0",

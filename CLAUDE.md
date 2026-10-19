@@ -52,7 +52,7 @@ Every scene is built by a static method under `Scripts/Editor/Builders`, run fro
 
 ## Navigating boards
 
-`StationBoard` (on each Canvas): right-drag pans, wheel zooms, Tab / Shift+Tab next / previous, 1-9 and 0 jump to tile N (the intro doesn't count), F focuses the tile under the cursor, Home fits all, H toggles the index bar. It moves the Board, never the tiles, so no resting value changes, and runs on unscaled time without DOTween. In the showcase, `ShotDirector` listens on the focused frame only: Space puts back and plays the cues, R puts back, L loops.
+`StationBoard` (on each Canvas): right-drag pans, wheel zooms, Tab / Shift+Tab next / previous, 1-9 and 0 jump to tile N (the intro doesn't count), F focuses the tile under the cursor, Home fits all, H toggles the index bar. It moves the Board, never the tiles, so no resting value changes, and runs on unscaled time without DOTween. In the showcase, `ShotDirector` listens on the focused frame only: Space puts back and plays the cues, R puts back, L loops. **A `LoopFromStart` frame loops whether or not it is focused**: focus only changes with Tab, digits, F or the index, so a frame reached by panning was never focused and stood still.
 
 ## Checking
 

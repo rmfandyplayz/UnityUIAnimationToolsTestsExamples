@@ -35,7 +35,7 @@ namespace UIAnimLab.Showcase
         [Tooltip("Seconds from Space to the next replay while looping. Leave at 0 to use the last cue's time plus 1.5 s.")]
         public float LoopEvery;
 
-        [Tooltip("Start looping as soon as play mode starts, while this frame is focused.")]
+        [Tooltip("Start looping as soon as play mode starts, focused or not. The keys still only work while it is focused.")]
         public bool LoopFromStart;
 
         private StationBoard board;
@@ -57,24 +57,26 @@ namespace UIAnimLab.Showcase
 
         private void Update()
         {
+            bool focused = Focused;
             var keyboard = Keyboard.current;
-            if (keyboard == null) return;
 
-            if (!Focused)
+            if (focused && keyboard != null)
             {
-                if (running != null) Stop();
-                return;
+                if (keyboard.spaceKey.wasPressedThisFrame) Play();
+                if (keyboard.rKey.wasPressedThisFrame) Stop();
+                if (keyboard.lKey.wasPressedThisFrame)
+                {
+                    looping = !looping;
+                    if (looping) Play();
+                }
+            }
+            else if (!focused && !LoopFromStart && running != null)
+            {
+                Stop();
             }
 
-            if (keyboard.spaceKey.wasPressedThisFrame) Play();
-            if (keyboard.rKey.wasPressedThisFrame) Stop();
-            if (keyboard.lKey.wasPressedThisFrame)
-            {
-                looping = !looping;
-                if (looping) Play();
-            }
-
-            if (looping && running == null) Play();
+            // A Loop From Start frame keeps looping whatever is focused: panning to it by hand doesn't focus it.
+            if (looping && running == null && (focused || LoopFromStart)) Play();
         }
 
         public void Play()

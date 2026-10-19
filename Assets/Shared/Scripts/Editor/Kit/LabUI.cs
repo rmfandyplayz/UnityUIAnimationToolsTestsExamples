@@ -66,6 +66,12 @@ namespace UIAnimLab.EditorTools
             return image;
         }
 
+        public const string FontFolder = "Assets/Shared/Fonts/";
+        public static TMP_FontAsset RegularFont => UnityEditor.AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontFolder + "SF-Pro-Display-Regular SDF.asset");
+        public static TMP_FontAsset BoldFont => UnityEditor.AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontFolder + "SF-Pro-Display-Bold SDF.asset");
+        /// <summary>The same face as a plain Font, for legacy <c>UnityEngine.UI.Text</c>.</summary>
+        public static Font LegacyFont => UnityEditor.AssetDatabase.LoadAssetAtPath<Font>(FontFolder + "SF-Pro-Display-Regular.otf");
+
         public static TextMeshProUGUI Text(Transform parent, string name, string text, float size, Color color, FontStyles style = FontStyles.Normal)
         {
             var rect = Rect(parent, name, Vector2.zero, new Vector2(200f, 40f));
@@ -73,6 +79,14 @@ namespace UIAnimLab.EditorTools
             label.text = text;
             label.fontSize = size;
             label.color = color;
+            // Bold uses the real Bold face rather than TMP's faux bold.
+            bool bold = (style & FontStyles.Bold) != 0;
+            var font = bold ? BoldFont : RegularFont;
+            if (font != null)
+            {
+                label.font = font;
+                if (bold) style &= ~FontStyles.Bold;
+            }
             label.fontStyle = style;
             label.textWrappingMode = TextWrappingModes.Normal;
             label.richText = true;

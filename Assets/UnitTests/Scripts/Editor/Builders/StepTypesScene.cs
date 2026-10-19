@@ -242,7 +242,7 @@ namespace UIAnimLab.UnitTests.Builders
 
             var legacyRect = UI.Rect(t.Stage, "Legacy Text", new Vector2(210f, 10f), new Vector2(120f, 90f));
             legacy = legacyRect.gameObject.AddComponent<Text>();
-            legacy.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            legacy.font = UI.LegacyFont != null ? UI.LegacyFont : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             legacy.text = "Text";
             legacy.fontSize = 40;
             legacy.alignment = TextAnchor.MiddleCenter;
